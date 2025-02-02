@@ -18,6 +18,12 @@ export class FeedService {
     return this.feedRepository.find();
   }
 
+  findPosts(take: number = 10, skip: number = 0) {
+    return this.feedRepository.findAndCount({ take, skip }).then(([posts]) => {
+      return posts;
+    });
+  }
+
   update(id: number, updateFeedDto: UpdateFeedDto) {
     return this.feedRepository.update(id, updateFeedDto);
   }
